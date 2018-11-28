@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true" uuid="f19798ca-7149-4079-87ee-2ac30d912cd8">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="salesbillno" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     medicine.`id` AS medicine_id,
+     medicine.`name` AS medicine_name,
+     medicine.`sales_unit` AS medicine_sales_unit,
+     medicine.`sales_price` AS medicine_sales_price,
+     patient.`id` AS patient_id,
+     patient.`name` AS patient_name,
+     sales.`id` AS sales_id,
+     sales.`patient` AS sales_patient,
+     sales.`amount` AS sales_amount,
+     sales.`discount` AS sales_discount,
+     sales.`net_amount` AS sales_net_amount,
+     sales.`date` AS sales_date,
+     sales_item.`id` AS sales_item_id,
+     sales_item.`sales` AS sales_item_sales,
+     sales_item.`medicine` AS sales_item_medicine,
+     sales_item.`quantity` AS sales_item_quantity,
+     sales_item.`price` AS sales_item_price,
+     sales_item.`discount` AS sales_item_discount,
+     sales_item.`amount` AS sales_item_amount
+FROM
+     `patient` patient INNER JOIN `sales` sales ON patient.`id` = sales.`patient`
+     INNER JOIN `sales_item` sales_item ON sales.`id` = sales_item.`sales`
+     INNER JOIN `medicine` medicine ON sales_item.`medicine` = medicine.`id`
+WHERE
+     sales.`id` = $P{salesbillno}]]>
+	</queryString>
+	<field name="medicine_id" class="java.lang.String"/>
+	<field name="medicine_name" class="java.lang.String"/>
+	<field name="medicine_sales_unit" class="java.lang.String"/>
+	<field name="medicine_sales_price" class="java.lang.String"/>
+	<field name="patient_id" class="java.lang.String"/>
+	<field name="patient_name" class="java.lang.String"/>
+	<field name="sales_id" class="java.lang.String"/>
+	<field name="sales_patient" class="java.lang.String"/>
+	<field name="sales_amount" class="java.lang.String"/>
+	<field name="sales_discount" class="java.lang.String"/>
+	<field name="sales_net_amount" class="java.lang.String"/>
+	<field name="sales_date" class="java.sql.Timestamp"/>
+	<field name="sales_item_id" class="java.lang.String"/>
+	<field name="sales_item_sales" class="java.lang.String"/>
+	<field name="sales_item_medicine" class="java.lang.String"/>
+	<field name="sales_item_quantity" class="java.lang.String"/>
+	<field name="sales_item_price" class="java.lang.String"/>
+	<field name="sales_item_discount" class="java.lang.String"/>
+	<field name="sales_item_amount" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="595" height="79" uuid="b56206fe-9c33-4f27-b3f1-9a3a16044d67"/>
+				<imageExpression><![CDATA["C:\\Users\\Samson\\Documents\\NetBeansProjects\\ThayagamMediClinic\\src\\AppPackage\\Image\\SalesBillTitle.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="10" width="80" height="15" uuid="e716f40e-e873-46b0-8aae-3563f6aca395"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<text><![CDATA[Patient ID :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="28" width="80" height="15" uuid="2c6bbb84-28d4-4541-87ad-56a61a686391"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<text><![CDATA[Patient Name :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="10" width="100" height="15" uuid="f8ebd697-97f1-4e00-8528-e899b8a3813a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_patient}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="28" width="100" height="15" uuid="1ba99639-eee1-4361-b0e7-89d793b7e953"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patient_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="10" width="65" height="15" uuid="768d5c0b-a93f-4eca-b0df-7ffbc3a4fa56"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<text><![CDATA[Invoice No :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="475" y="28" width="100" height="15" uuid="2d18feb5-dfd9-4477-8ae3-dc35fcf407a3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="475" y="10" width="100" height="15" uuid="1accd4dc-b06e-41ed-90e7-79e2c8b1d9cb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="405" y="28" width="65" height="15" uuid="c6ba977a-e891-4f2d-8a1e-370ba5de39f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="10" width="65" height="15" uuid="2ef391b1-b6a8-47f4-95b1-4d7f2e38fbfc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="10" width="125" height="15" uuid="afc81308-d5d7-4e6c-beed-04aaf2d3836b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medicine Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="10" width="50" height="15" uuid="d995d50a-831b-463b-9aa0-381e0fb10ce0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="10" width="50" height="15" uuid="57429acd-99f3-492c-a0b2-b662ac278e4d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="10" width="50" height="15" uuid="14181e79-b3ef-42ca-ae8f-dee9fa7396d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="10" width="70" height="15" uuid="a3d2f14a-7cfd-49da-9344-7e498280ce4c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="10" width="70" height="15" uuid="f8ea26e0-d6bc-490b-a9c9-0aadb4cd7356"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Discount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="10" width="70" height="15" uuid="a3190255-14cb-4f64-981b-5e6ac2fd29bd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Net Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="1" width="550" height="1" uuid="e638df1f-667a-4579-8677-7703bb4fbe67"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="1" width="65" height="15" uuid="89567a0a-490b-4555-93b4-ecd8c1dc7f6e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_item_medicine}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="1" width="125" height="15" uuid="de6655d9-67a4-4f2f-909d-50778bb8c8fa"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicine_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="1" width="50" height="15" uuid="99a5a6b8-ab56-40c9-8c68-71e666239ff9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicine_sales_unit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="1" width="50" height="15" uuid="91800ca4-1ee1-48f3-b167-9833a8f70ca0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicine_sales_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="1" width="50" height="15" uuid="9853159b-9ac9-49a6-8929-16e771670c0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_item_quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="1" width="65" height="15" uuid="c0433e47-d40a-4850-8fc9-3da71c5bb42d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_item_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="1" width="65" height="15" uuid="e1e085e7-d5b3-44a6-8ae5-cd2c3c12fa0b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_item_discount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="1" width="70" height="15" uuid="9d4adfd3-80c0-46b1-8b21-c4755d0000e8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_item_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="430" y="5" width="70" height="15" uuid="114455cb-2cf4-4398-99cc-b3cf63dbdcbe"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_discount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="5" width="70" height="15" uuid="64843418-1a93-4c7d-97f0-d63914caebb8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="5" width="70" height="15" forecolor="#CC0000" uuid="2e4b32b3-c7ea-479c-8f9f-4aca200876fa"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sales_net_amount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="5" width="340" height="15" uuid="85ac7db5-ddfe-4780-89e5-1134a4c19015"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="1" width="550" height="1" uuid="1acdb1c3-a236-4847-8677-dac0ea51dbd4"/>
+			</line>
+			<line>
+				<reportElement x="20" y="23" width="550" height="1" uuid="9cce20bd-3de8-4167-a632-9fef06e5ee87"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
